@@ -4,6 +4,7 @@ const session = require("express-session");
 require("dotenv").config();
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var compression = require('compression')
 // var logger = require('morgan');
 
 const routes = require("./controller");

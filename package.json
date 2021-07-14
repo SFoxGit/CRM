@@ -29,7 +29,6 @@
     "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "if-env": "^1.0.4",
-    "jade": "~1.11.0",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2"
   }
