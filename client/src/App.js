@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
+import Login from "./components/Login";
 
 
 function App() {
@@ -16,6 +17,11 @@ function App() {
     <Router>
       <Header />
       <p>{test}</p>
+      <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+      </Switch>
     </Router>
   );
 }
