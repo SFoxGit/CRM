@@ -13,7 +13,7 @@ export default function Header() {
           {/* <NavDropdown title="Work" id="collasible-nav-dropdown">
             <NavDropdown.Item href="/work">All Projects</NavDropdown.Item>
           </NavDropdown> */}
-          <Nav.Link href="/resume" style={{color: "black"}}>Login</Nav.Link>
+          <Nav.Link href="/login" style={{color: "black"}}>Login</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

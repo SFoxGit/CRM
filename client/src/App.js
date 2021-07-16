@@ -7,6 +7,9 @@ import Login from "./components/Login";
 
 function App() {
   const [test, setTest] = useState([])
+  const [loggedIn, setLoggedIn] = useState();
+  const [userID, setUserID] = useState();
+
   useEffect(() => {
     axios.get('/api/user')
       .then(res => {
@@ -19,7 +22,7 @@ function App() {
       <p>{test}</p>
       <Switch>
         <Route exact path="/login">
-          <Login />
+          <Login setUserID={setUserID} setLoggedIn={setLoggedIn} />
         </Route>
       </Switch>
     </Router>
