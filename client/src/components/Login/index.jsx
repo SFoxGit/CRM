@@ -11,7 +11,6 @@ export default function Login(props) {
   const loginUsername = useRef();
   const loginFormHandler = async (event) => {
     event.preventDefault();
-
     const email = loginEmail.current.value;
     const password = loginUsername.current.value;
 
@@ -23,8 +22,6 @@ export default function Login(props) {
           history.push('/')
         })
         .catch(err => console.log(err))
-
-
     }
   };
   const signupEmail = useRef();
@@ -46,13 +43,10 @@ export default function Login(props) {
         })
         .catch(err => console.log(err))
     }
-
   };
 
   return (
     <div className="container main-content">
-      
-
       <div className="row justify-content-center">
         <form className="col-4">
           <h3>Sign Up</h3>
