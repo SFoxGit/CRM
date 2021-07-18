@@ -1,14 +1,21 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 // import userContext from "../../utils/userContext";
 import { useHistory } from "react-router-dom";
 
 export default function Login(props) {
+  const [join, setJoin] = useState(false)
   const setUserID = props.setUserID
   const setLoggedIn = props.setLoggedIn
   const history = useHistory()
   const loginEmail = useRef();
   const loginUsername = useRef();
+  const orgCode = useRef();
+
+  const joinOrg = async (event) => {
+    event.preventDefault();
+    setJoin(!join)
+  }
   const loginFormHandler = async (event) => {
     event.preventDefault();
     const email = loginEmail.current.value;
@@ -62,6 +69,20 @@ export default function Login(props) {
             <label htmlFor="signupPassword">Password</label>
             <input ref={signupPassword} type="password" className="form-control" id="signupPassword" />
           </div>
+          <div className="form-group">
+            <label htmlFor="createOrg">Create Organization</label>
+            <input type="checkbox" className="form-control" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="joinOrg">Join Organization</label>
+            {join ? <input onChange={joinOrg} type="checkbox" className="form-control" checked /> : <input onChange={joinOrg} type="checkbox" className="form-control" />}
+          </div>
+          {join ?
+            <div className="form-group">
+              <label htmlFor="orgCode">Organization Code</label>
+              <input ref={orgCode} type="text" className="form-control" />
+            </div> : null
+          }
           <div className="btn-parent">
             <button onClick={signupFormHandler} type="submit" className="btn">Sign Up</button>
           </div>
