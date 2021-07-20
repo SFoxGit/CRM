@@ -1,5 +1,6 @@
 const User = require("./User");
+const Organization = require("./Organization");
 
 
 
-module.exports = {User};
+module.exports = {User, Organization};

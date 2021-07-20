@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 export default function Login(props) {
   const [join, setJoin] = useState(false);
   const [create, setCreate] = useState(false);
+  const setOrganization = props.setOrganization;
   const setUserID = props.setUserID
   const setLoggedIn = props.setLoggedIn
   const history = useHistory()
@@ -54,9 +55,35 @@ export default function Login(props) {
     const username = signupUsername.current.value;
     const password = signupPassword.current.value;
     const org = createOrg.current.value;
+    const orgname = orgName.current.value;
 
-    if (org) {
-      console.log("org true")
+    if (email && username && password && org) {
+      console.log("org true");
+      const admin = true
+      await axios.post('/api/org', {orgname})
+      .then(res => {
+        setOrganization(res.data)
+      })
+      .catch(err => console.log(err))
+      await axios.post('/api/user', { email, username, password, admin }, { withCredentials: true })
+      .then(res => {
+        setUserID(res.data.user_id)
+        setLoggedIn(true);
+        history.push('/');
+      })
+      .catch(err => console.log(err))
+    }
+
+    if (email && username && password && join) {
+      console.log("join true");
+      const admin = false
+      await axios.post('/api/user', { email, username, password, admin }, { withCredentials: true })
+      .then(res => {
+        setUserID(res.data.user_id)
+        setLoggedIn(true);
+        history.push('/');
+      })
+      .catch(err => console.log(err))
     }
 
     if (email && username && password) {
@@ -64,7 +91,7 @@ export default function Login(props) {
         .then(res => {
           setUserID(res.data.user_id)
           setLoggedIn(true);
-          history.push('/CreateGame');
+          history.push('/');
         })
         .catch(err => console.log(err))
     }
@@ -91,7 +118,7 @@ export default function Login(props) {
             <>
               <div className="form-group">
                 <label htmlFor="createOrg">Create Organization</label>
-                <input onChange={startOrg} ref={createOrg} type="checkbox" className="form-control" checked/>
+                <input onChange={startOrg} ref={createOrg} type="checkbox" className="form-control" checked />
               </div>
               <div className="form-group">
                 <label htmlFor="createOrg">Organization Name</label>

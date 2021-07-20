@@ -35,6 +35,10 @@ User.init(
         len: [8],
       },
     },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   },
   {
     hooks: {
