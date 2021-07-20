@@ -73,15 +73,22 @@ export default function Login(props) {
             <label htmlFor="createOrg">Create Organization</label>
             <input type="checkbox" className="form-control" />
           </div>
-          <div className="form-group">
-            <label htmlFor="joinOrg">Join Organization</label>
-            {join ? <input onChange={joinOrg} type="checkbox" className="form-control" checked /> : <input onChange={joinOrg} type="checkbox" className="form-control" />}
-          </div>
           {join ?
+            <>
+              <div className="form-group">
+                <label htmlFor="joinOrg">Join Organization</label>
+                <input onChange={joinOrg} type="checkbox" className="form-control" checked />
+              </div>
+              <div className="form-group">
+                <label htmlFor="orgCode">Organization Code</label>
+                <input ref={orgCode} type="text" className="form-control" />
+              </div>
+            </>
+            :
             <div className="form-group">
-              <label htmlFor="orgCode">Organization Code</label>
-              <input ref={orgCode} type="text" className="form-control" />
-            </div> : null
+              <label htmlFor="joinOrg">Join Organization</label>
+              <input onChange={joinOrg} type="checkbox" className="form-control" />
+            </div>
           }
           <div className="btn-parent">
             <button onClick={signupFormHandler} type="submit" className="btn">Sign Up</button>
@@ -102,6 +109,6 @@ export default function Login(props) {
           </div>
         </form>
       </div>
-    </div>
+    </div >
   )
 }
