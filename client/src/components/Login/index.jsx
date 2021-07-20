@@ -4,7 +4,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function Login(props) {
-  const [join, setJoin] = useState(false)
+  const [join, setJoin] = useState(false);
+  const [create, setCreate] = useState(false);
   const setUserID = props.setUserID
   const setLoggedIn = props.setLoggedIn
   const history = useHistory()
@@ -15,6 +16,16 @@ export default function Login(props) {
   const joinOrg = async (event) => {
     event.preventDefault();
     setJoin(!join)
+    if (create) {
+      setCreate(false)
+    }
+  }
+  const startOrg = async (event) => {
+    event.preventDefault();
+    setCreate(!create);
+    if (join) {
+      setJoin(false)
+    }
   }
   const loginFormHandler = async (event) => {
     event.preventDefault();
@@ -34,12 +45,19 @@ export default function Login(props) {
   const signupEmail = useRef();
   const signupUsername = useRef();
   const signupPassword = useRef();
+  const createOrg = useRef();
+  const orgName = useRef();
 
   const signupFormHandler = async (event) => {
     event.preventDefault();
     const email = signupEmail.current.value;
     const username = signupUsername.current.value;
     const password = signupPassword.current.value;
+    const org = createOrg.current.value;
+
+    if (org) {
+      console.log("org true")
+    }
 
     if (email && username && password) {
       await axios.post('/api/user', { email, username, password }, { withCredentials: true })
@@ -69,10 +87,23 @@ export default function Login(props) {
             <label htmlFor="signupPassword">Password</label>
             <input ref={signupPassword} type="password" className="form-control" id="signupPassword" />
           </div>
-          <div className="form-group">
-            <label htmlFor="createOrg">Create Organization</label>
-            <input type="checkbox" className="form-control" />
-          </div>
+          {create ?
+            <>
+              <div className="form-group">
+                <label htmlFor="createOrg">Create Organization</label>
+                <input onChange={startOrg} ref={createOrg} type="checkbox" className="form-control" checked/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="createOrg">Organization Name</label>
+                <input ref={orgName} type="text" className="form-control" />
+              </div>
+            </>
+            :
+            <div className="form-group">
+              <label htmlFor="createOrg">Create Organization</label>
+              <input onChange={startOrg} ref={createOrg} type="checkbox" className="form-control" />
+            </div>
+          }
           {join ?
             <>
               <div className="form-group">
