@@ -54,11 +54,13 @@ export default function Login(props) {
     const email = signupEmail.current.value;
     const username = signupUsername.current.value;
     const password = signupPassword.current.value;
-    const org = createOrg.current.value;
-    const orgname = orgName.current.value;
+    const orgTF = createOrg.current.value;
+    console.log(orgTF);
 
-    if (email && username && password && org) {
+    if (email && username && password && create) {
+      console.log(orgTF);
       console.log("org true");
+      const orgname = orgName.current.value;
       const admin = true
       await axios.post('/api/org', {orgname})
       .then(res => {
@@ -76,8 +78,10 @@ export default function Login(props) {
 
     if (email && username && password && join) {
       console.log("join true");
+      console.log(orgTF);
       const admin = false
-      await axios.post('/api/user', { email, username, password, admin }, { withCredentials: true })
+      const org = orgCode.current.value
+      await axios.post('/api/user', { email, username, password, admin, org }, { withCredentials: true })
       .then(res => {
         setUserID(res.data.user_id)
         setLoggedIn(true);
@@ -86,15 +90,15 @@ export default function Login(props) {
       .catch(err => console.log(err))
     }
 
-    if (email && username && password) {
-      await axios.post('/api/user', { email, username, password }, { withCredentials: true })
-        .then(res => {
-          setUserID(res.data.user_id)
-          setLoggedIn(true);
-          history.push('/');
-        })
-        .catch(err => console.log(err))
-    }
+    // if (email && username && password) {
+    //   await axios.post('/api/user', { email, username, password }, { withCredentials: true })
+    //     .then(res => {
+    //       setUserID(res.data.user_id)
+    //       setLoggedIn(true);
+    //       history.push('/');
+    //     })
+    //     .catch(err => console.log(err))
+    // }
   };
 
   return (
@@ -118,7 +122,7 @@ export default function Login(props) {
             <>
               <div className="form-group">
                 <label htmlFor="createOrg">Create Organization</label>
-                <input onChange={startOrg} ref={createOrg} type="checkbox" className="form-control" checked />
+                <input onChange={startOrg} value={true} ref={createOrg} type="checkbox" className="form-control" checked />
               </div>
               <div className="form-group">
                 <label htmlFor="createOrg">Organization Name</label>
@@ -128,14 +132,14 @@ export default function Login(props) {
             :
             <div className="form-group">
               <label htmlFor="createOrg">Create Organization</label>
-              <input onChange={startOrg} ref={createOrg} type="checkbox" className="form-control" />
+              <input onChange={startOrg} value={false} ref={createOrg} type="checkbox" className="form-control" />
             </div>
           }
           {join ?
             <>
               <div className="form-group">
                 <label htmlFor="joinOrg">Join Organization</label>
-                <input onChange={joinOrg} type="checkbox" className="form-control" checked />
+                <input onChange={joinOrg} value={true} type="checkbox" className="form-control" checked />
               </div>
               <div className="form-group">
                 <label htmlFor="orgCode">Organization Code</label>
@@ -145,7 +149,7 @@ export default function Login(props) {
             :
             <div className="form-group">
               <label htmlFor="joinOrg">Join Organization</label>
-              <input onChange={joinOrg} type="checkbox" className="form-control" />
+              <input onChange={joinOrg} value={false} type="checkbox" className="form-control" />
             </div>
           }
           <div className="btn-parent">

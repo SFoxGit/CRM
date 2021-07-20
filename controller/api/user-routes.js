@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
       admin: req.body.admin,
+      org: req.body.orgCode,
     });
 
     const dbUserId = await User.findOne({

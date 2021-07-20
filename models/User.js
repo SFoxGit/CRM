@@ -39,6 +39,13 @@ User.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    org: {
+      type: DataTypes.UUID,
+      references: {
+        model: "organization",
+        key: 'id',
+      }
+    }
   },
   {
     hooks: {
