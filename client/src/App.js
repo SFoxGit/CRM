@@ -26,7 +26,12 @@ function App() {
       <p>{userID}</p>
       <Switch>
         <Route exact path="/login">
-          <Login setUserID={setUserID} setLoggedIn={setLoggedIn} setOrganization={setOrganization}/>
+          <Login 
+          setUserID={setUserID} 
+          setLoggedIn={setLoggedIn} 
+          setOrganization={setOrganization}
+          organization={organization}
+          />
         </Route>
       </Switch>
     </Router>

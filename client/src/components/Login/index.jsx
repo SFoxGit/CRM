@@ -7,6 +7,7 @@ export default function Login(props) {
   const [join, setJoin] = useState(false);
   const [create, setCreate] = useState(false);
   const setOrganization = props.setOrganization;
+  const organization = props.organization;
   const setUserID = props.setUserID
   const setLoggedIn = props.setLoggedIn
   const history = useHistory()
@@ -67,7 +68,7 @@ export default function Login(props) {
         setOrganization(res.data)
       })
       .catch(err => console.log(err))
-      await axios.post('/api/user', { email, username, password, admin }, { withCredentials: true })
+      await axios.post('/api/user', { email, username, password, admin, org: organization }, { withCredentials: true })
       .then(res => {
         setUserID(res.data.user_id)
         setLoggedIn(true);

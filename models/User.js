@@ -40,7 +40,7 @@ User.init(
       allowNull: false,
     },
     org: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       references: {
         model: "organization",
         key: 'id',
