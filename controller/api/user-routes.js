@@ -68,13 +68,8 @@ router.post("/login", async (req, res) => {
     };
 
     const user = await JSON.parse(JSON.stringify(dbUserData));
-    const playerData = await Player.findOne({ where: { user_id: user.id } });
 
-    const playerFormat = await JSON.parse(JSON.stringify(playerData));
-    if (playerData) {
-      req.session.game_id = playerFormat.game_id
-
-    }
+    
     
     // req.session.save(() => {
       // await res.cookie("id", userID, {signed: true, httpOnly: true})

@@ -7,7 +7,6 @@ export default function Login(props) {
   const [join, setJoin] = useState(false);
   const [create, setCreate] = useState(false);
   const setOrganization = props.setOrganization;
-  const organization = props.organization;
   const setUserID = props.setUserID
   const setLoggedIn = props.setLoggedIn
   const history = useHistory()
