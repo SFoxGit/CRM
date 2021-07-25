@@ -9,7 +9,7 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Link href="/about" style={{color: "black"}}>Customers</Nav.Link>
+          <Nav.Link href="/customers" style={{color: "black"}}>Customers</Nav.Link>
           {/* <NavDropdown title="Work" id="collasible-nav-dropdown">
             <NavDropdown.Item href="/work">All Projects</NavDropdown.Item>
           </NavDropdown> */}

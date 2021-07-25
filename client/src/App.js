@@ -33,6 +33,8 @@ function App() {
           organization={organization}
           />
         </Route>
+        <Route exact path="/customers">
+        </Route>
       </Switch>
     </Router>
   );
