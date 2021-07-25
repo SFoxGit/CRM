@@ -5,6 +5,7 @@ Organization.hasMany(User, {
   foreignKey: "org"
 });
 User.belongsTo(Organization, {
+  as: "organization",
   foreignKey: "org"
 })
 

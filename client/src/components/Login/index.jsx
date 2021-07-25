@@ -17,14 +17,14 @@ export default function Login(props) {
 
   const joinOrg = async (event) => {
     event.preventDefault();
-    setJoin(!join)
+    await setJoin(!join)
     if (create) {
       setCreate(false)
     }
   }
   const startOrg = async (event) => {
     event.preventDefault();
-    setCreate(!create);
+    await setCreate(!create);
     if (join) {
       setJoin(false)
     }
@@ -35,7 +35,7 @@ export default function Login(props) {
     const password = loginUsername.current.value;
 
     if (email && password) {
-      await axios.post('/api/user/login', { email, password }, { withCredentials: true })
+      await axios.post('/api/user/login', { email, password })
         .then(res => {
           setUserID(res.data.user_id)
           setLoggedIn(true);
@@ -63,18 +63,19 @@ export default function Login(props) {
       console.log("org true");
       const orgname = orgName.current.value;
       const admin = true
-      await axios.post('/api/org', {orgname})
-      .then(res => {
-        setOrganization(res.data)
-      })
-      .catch(err => console.log(err))
-      await axios.post('/api/user', { email, username, password, admin, org: organization }, { withCredentials: true })
-      .then(res => {
-        setUserID(res.data.user_id)
-        setLoggedIn(true);
-        history.push('/');
-      })
-      .catch(err => console.log(err))
+      await axios.post('/api/org', { orgname })
+        .then(res => {
+          console.log(res.data)
+          setOrganization(res.data)
+          axios.post('/api/user', { email, username, password, admin, org: res.data })
+            .then(res => {
+              setUserID(res.data.user_id)
+              setLoggedIn(true);
+              history.push('/');
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
     }
 
     if (email && username && password && join) {
@@ -82,13 +83,13 @@ export default function Login(props) {
       console.log(orgTF);
       const admin = false
       const org = orgCode.current.value
-      await axios.post('/api/user', { email, username, password, admin, org }, { withCredentials: true })
-      .then(res => {
-        setUserID(res.data.user_id)
-        setLoggedIn(true);
-        history.push('/');
-      })
-      .catch(err => console.log(err))
+      await axios.post('/api/user', { email, username, password, admin, org })
+        .then(res => {
+          setUserID(res.data.user_id)
+          setLoggedIn(true);
+          history.push('/');
+        })
+        .catch(err => console.log(err))
     }
 
     // if (email && username && password) {
