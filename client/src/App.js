@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Login from "./components/Login";
+import Login from "./components/Login/login";
 import Customers from "./components/Customers/customers";
 
 

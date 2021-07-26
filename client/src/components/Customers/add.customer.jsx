@@ -14,7 +14,19 @@ export default function AddCustomer(props) {
   const submit = async (e) => {
     e.preventDefault();
     setPhoneNum(phone.current.value)
-    await axios.post('/api/customer', {})
+    await axios.post('/api/customer', {
+      name: company.current.value, 
+      address: address.current.value, 
+      city: city.current.value,
+      state: state.current.value,
+      industry: industry.current.value,
+      phone: phone.current.value,
+      username: userId
+    })
+    .then(res => {
+      console.log("added")
+    })
+    .catch(err => console.log(err))
   }
   return (
     <div>
