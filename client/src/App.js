@@ -3,6 +3,7 @@ import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import Customers from "./components/Customers/customers";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           />
         </Route>
         <Route exact path="/customers">
+          <Customers />
         </Route>
       </Switch>
     </Router>
