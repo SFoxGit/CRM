@@ -11,10 +11,9 @@ class User extends Model {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     username: {
       type: DataTypes.STRING,
@@ -40,7 +39,7 @@ User.init(
       allowNull: false,
     },
     org: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       references: {
         model: "organization",
         key: 'id',

@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { useRef, useState } from 'react'
 
-export default function AddCustomer() {
+export default function AddCustomer(props) {
+  const userId = props.userId;
   const company = useRef();
   const address = useRef();
   const city = useRef();
@@ -9,9 +11,10 @@ export default function AddCustomer() {
   const phone = useRef();
   const [phoneNum, setPhoneNum] = useState();
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setPhoneNum(phone.current.value)
+    await axios.post('/api/customer', {})
   }
   return (
     <div>

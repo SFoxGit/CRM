@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import axios from "axios";
 import AddCustomer from './add.customer';
 
-export default function Customers() {
-
+export default function Customers(props) {
+const userId = props.userId;
   useEffect(() => {
 
   }, [])
   return (
     <div>
-      <AddCustomer />
+      <AddCustomer userId={userId}/>
     </div>
   )
 }
