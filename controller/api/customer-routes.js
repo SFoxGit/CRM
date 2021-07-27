@@ -2,8 +2,16 @@ const router = require('express').Router();
 const { Customer } = require("../../models");
 const withAuth = require('../../utils/auth');
 
-router.get("/", function (req, res, next) {
-  res.status(200).send("test");
+router.get("/", async (req, res, next) => {
+  try {
+    const customers = await Customer.findAll({
+      where: {username: req.session.user_id}
+    })
+    const formatCust = await JSON.parse(JSON.stringify(customers));
+    res.status(200).json(formatCust);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post("/", async (req, res) => {

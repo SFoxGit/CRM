@@ -1,15 +1,48 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import AddCustomer from './add.customer';
 
 export default function Customers(props) {
-const userId = props.userId;
+  const userId = props.userId;
+  const [customers, setCustomers] = useState([])
   useEffect(() => {
-
+    axios.get('/api/customer')
+      .then(res => {
+        setCustomers(res.data)
+      })
   }, [])
   return (
     <div>
-      <AddCustomer userId={userId}/>
+      {customers.length ?
+        <Table striped bordered hover variant="dark" className="sortable">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Industry</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {customers.map(element => (
+              <tr key={element.id}>
+                <td>{element.name}</td>
+                <td>{element.address}</td>
+                <td>{element.city}</td>
+                <td>{element.state}</td>
+                <td>{element.industry}</td>
+                <td>{element.phone}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        :
+        null
+    }
+      <AddCustomer userId={userId} />
     </div>
   )
 }
