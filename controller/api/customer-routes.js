@@ -14,6 +14,18 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const customer = await Customer.findOne({
+      where: {id: req.params.id}
+    })
+    const formatCust = await JSON.parse(JSON.stringify(customer));
+    res.status(200).json(formatCust);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     await Customer.create({

@@ -2,9 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router';
 
 export default function Customers(props) {
-  const [customers, setCustomers] = useState([])
+  const [customers, setCustomers] = useState([]);
+  const setCustomer = props.setCustomer;
+  const history = useHistory();
+
+  const selectCust = (id) => {
+    setCustomer(id);
+    history.push("/detailcustomer")
+  }
   useEffect(() => {
     axios.get('/api/customer')
       .then(res => {
@@ -28,7 +36,7 @@ export default function Customers(props) {
           <tbody>
             {customers.map(element => (
               <tr key={element.id}>
-                <td>{element.name}</td>
+                <td onClick={() => selectCust(element.id)}>{element.name}</td>
                 <td>{element.address}</td>
                 <td>{element.city}</td>
                 <td>{element.state}</td>

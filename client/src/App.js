@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Login from "./components/Login/login";
 import Customers from "./components/Customers/customers";
 import AddCustomer from './components/Customers/add.customer';
+import CustomerDetail from "./components/Customers/detail.customer";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState();
   const [userID, setUserID] = useState();
   const [organization, setOrganization] = useState();
+  const [customer, setCustomer] = useState();
 
   useEffect(() => {
     axios.get('/api/user')
@@ -38,10 +40,14 @@ function App() {
         <Route exact path="/customers">
           <Customers
             userID={userID}
+            setCustomer={setCustomer}
           />
         </Route>
         <Route exact path="/addcustomer">
           <AddCustomer userId={userID} />
+        </Route>
+        <Route exact path="/detailcustomer">
+          <CustomerDetail customer={customer} userID={userID} />
         </Route>
       </Switch>
     </Router>
