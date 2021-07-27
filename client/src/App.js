@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./components/Login/login";
 import Customers from "./components/Customers/customers";
+import AddCustomer from './components/Customers/add.customer';
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
           <Customers
             userID={userID}
           />
+        </Route>
+        <Route exact path="/addcustomer">
+          <AddCustomer userId={userID} />
         </Route>
       </Switch>
     </Router>

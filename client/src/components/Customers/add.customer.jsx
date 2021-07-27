@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import { useHistory } from "react-router";
 
 export default function AddCustomer(props) {
   const userId = props.userId;
+  const history = useHistory();
   const company = useRef();
   const address = useRef();
   const city = useRef();
@@ -25,6 +28,7 @@ export default function AddCustomer(props) {
     })
     .then(res => {
       console.log("added")
+      history.push("/customers")
     })
     .catch(err => console.log(err))
   }
@@ -112,7 +116,7 @@ export default function AddCustomer(props) {
           <small>Format: 123-456-7890</small>
         </div>
         <div className="btn-parent">
-          <button onClick={submit} type="submit" className="btn">Submit</button>
+          <Button onClick={submit} type="submit" className="btn">Submit</Button>
         </div>
       </form>
     </div>

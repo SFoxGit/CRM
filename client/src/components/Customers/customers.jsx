@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
-import AddCustomer from './add.customer';
+import Button from 'react-bootstrap/Button'
 
 export default function Customers(props) {
-  const userId = props.userId;
   const [customers, setCustomers] = useState([])
   useEffect(() => {
     axios.get('/api/customer')
@@ -42,7 +41,8 @@ export default function Customers(props) {
         :
         null
     }
-      <AddCustomer userId={userId} />
+    <Button href="/addcustomer" variant="dark">Add Customer</Button>
+      
     </div>
   )
 }

@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
       phone: req.body.phone,
       username: req.session.user_id,
     })
-    res.status(200)
+    res.status(200).json("test")
   } catch (err) {
     res.status(500).json(err);
   }
