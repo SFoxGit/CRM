@@ -21,7 +21,14 @@ Contact.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    company: {
+      type: DataTypes.UUID,
+      references: {
+        model: "customer",
+        key: 'id',
+      }
+    },
   },
   {
     sequelize,
