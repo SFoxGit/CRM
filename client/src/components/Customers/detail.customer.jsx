@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 
 export default function CustomerDetail(props) {
   const customer = props.customer
@@ -23,6 +23,7 @@ export default function CustomerDetail(props) {
         <Col>{custData.industry}</Col>
         <Col>{custData.phone}</Col>
       </Row>
+      <Button>Add Contact</Button>
     </Container>
   )
 }
