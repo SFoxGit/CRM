@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export default function AddContact(props) {
   // const history = useHistory();
+  const setShowForm = props.setShowForm
   const nameRef = useRef();
   const titleRef = useRef();
   const phoneRef = useRef();
@@ -19,7 +20,7 @@ export default function AddContact(props) {
     })
     .then(res => {
       console.log("added")
-      
+      setShowForm(false)
     })
     .catch(err => console.log(err))
   }

@@ -9,8 +9,8 @@ export default function Customers(props) {
   const setCustomer = props.setCustomer;
   const history = useHistory();
 
-  const selectCust = (id) => {
-    setCustomer(id);
+  const selectCust = async (id) => {
+    await setCustomer(id);
     history.push("/detailcustomer")
   }
   useEffect(() => {

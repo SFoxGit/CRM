@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Customer } = require("../../models");
+const { Customer, Contact } = require("../../models");
 const withAuth = require('../../utils/auth');
 
 router.get("/", async (req, res, next) => {
@@ -17,7 +17,10 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const customer = await Customer.findOne({
-      where: {id: req.params.id}
+      where: {id: req.params.id},
+      include: [{
+        model: Contact,
+      }]
     })
     const formatCust = await JSON.parse(JSON.stringify(customer));
     res.status(200).json(formatCust);
