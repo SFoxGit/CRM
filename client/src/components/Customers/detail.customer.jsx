@@ -38,7 +38,7 @@ export default function CustomerDetail(props) {
       }
       {showContacts ?
         <>
-          {custData.contacts.map(contact => <Contact contact={contact} />)}
+          {custData.contacts.map(contact => <Contact key={contact.id} contact={contact} />)}
           <Button onClick={() => setShowContacts(false)}>Hide Contacts</Button>
         </>
         :
