@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import AddContact from '../Contact/add.contact'
+import Contact from '../Contact/contact'
 
 export default function CustomerDetail(props) {
   const customer = props.customer
@@ -26,7 +27,6 @@ export default function CustomerDetail(props) {
         <Col>{custData.state}</Col>
         <Col>{custData.industry}</Col>
         <Col>{custData.phone}</Col>
-        <Col>{custData.Contacts}</Col>
       </Row>
       {showForm ?
         <AddContact setShowForm={setShowForm} id={custData.id} />
@@ -35,6 +35,14 @@ export default function CustomerDetail(props) {
           <Button onClick={() => setShowForm(true)}>Add Contact</Button>
           <Button onClick={() => setShowContacts(true)}>View Contacts</Button>
         </>
+      }
+      {showContacts ?
+        <>
+          {custData.contacts.map(contact => <Contact contact={contact} />)}
+          <Button onClick={() => setShowContacts(false)}>Hide Contacts</Button>
+        </>
+        :
+        null
       }
     </Container>
   )

@@ -45,6 +45,9 @@ export default function AddContact(props) {
         <div className="btn-parent">
           <Button onClick={submit} type="submit" className="btn">Submit</Button>
         </div>
+        <div className="btn-parent">
+          <Button onClick={() => setShowForm(false)} type="submit" className="btn">Cancel</Button>
+        </div>
       </form>
     </div>
   )
