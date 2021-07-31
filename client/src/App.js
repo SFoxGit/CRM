@@ -14,6 +14,7 @@ function App() {
   const [userID, setUserID] = useState();
   const [organization, setOrganization] = useState();
   const [customer, setCustomer] = useState();
+  const [name, setName] = useState();
 
   useEffect(() => {
     axios.get('/api/user')
@@ -28,6 +29,7 @@ function App() {
       <p>{organization}</p>
       <p>{loggedIn}</p>
       <p>{userID}</p>
+      <p>{name}</p>
       <Switch>
         <Route exact path="/login">
           <Login
@@ -35,6 +37,7 @@ function App() {
             setLoggedIn={setLoggedIn}
             setOrganization={setOrganization}
             organization={organization}
+            setName={setName}
           />
         </Route>
         <Route exact path="/customers">

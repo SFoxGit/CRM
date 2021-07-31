@@ -9,6 +9,7 @@ export default function Login(props) {
   const setOrganization = props.setOrganization;
   const setUserID = props.setUserID
   const setLoggedIn = props.setLoggedIn
+  const setName = props.setName
   const history = useHistory()
   const loginEmail = useRef();
   const loginUsername = useRef();
@@ -35,9 +36,11 @@ export default function Login(props) {
 
     if (email && password) {
       await axios.post('/api/user/login', { email, password })
-        .then(res => {
-          setUserID(res.data.user_id)
-          setLoggedIn(true);
+        .then(async res => {
+          await setUserID(res.data.id)
+          await setLoggedIn(true);
+          await setOrganization(res.data.organization);
+          await setName(res.data.name)
           history.push('/')
         })
         .catch(err => console.log(err))

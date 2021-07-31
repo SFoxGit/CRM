@@ -73,9 +73,15 @@ router.post("/login", async (req, res) => {
     
     // req.session.save(() => {
       // await res.cookie("id", userID, {signed: true, httpOnly: true})
+      
+    const returnData = {
+      name: user.username,
+      organization: user.org,
+      id: user.id
+    }
     req.session.user_id = user.id;
     req.session.loggedIn = true;
-    res.status(200).json(req.session)
+    res.status(200).json(returnData)
     // res
     //   .status(200)
     //   .json({ user: dbUserData, message: "You are now logged in!" });
