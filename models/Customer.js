@@ -34,6 +34,10 @@ Customer.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    note: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     username: {
       type: DataTypes.UUID,
       references: {
