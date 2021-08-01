@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 router.get("/", async (req, res, next) => {
   try {
     const customers = await Customer.findAll({
-      where: {username: req.session.user_id}
+      where: { username: req.session.user_id }
     })
     const formatCust = await JSON.parse(JSON.stringify(customers));
     res.status(200).json(formatCust);
@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const customer = await Customer.findOne({
-      where: {id: req.params.id},
+      where: { id: req.params.id },
       include: [{
         model: Contact,
       }]
@@ -43,6 +43,22 @@ router.post("/", async (req, res) => {
     res.status(200).json("test")
   } catch (err) {
     res.status(500).json(err);
+  }
+})
+
+router.put("/:id", async (req, res) => {
+  try {
+    const findCustomer = await Customer.findOne({
+      where: { id: req.params.id }
+    })
+    const formatCustomer = JSON.parse(JSON.stringify(findCustomer))
+    await Customer.update(
+      { note: req.body.note },
+      { where: { id: req.params.id } }
+    )
+    res.status(200).json(formatCustomer)
+  } catch (err) {
+    res.status(500).json(err)
   }
 })
 
