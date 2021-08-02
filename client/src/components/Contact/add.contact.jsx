@@ -6,6 +6,9 @@ import axios from 'axios';
 export default function AddContact(props) {
   // const history = useHistory();
   const setShowForm = props.setShowForm
+  const setCustData = props.setCustData
+  const customer = props.customer
+  // const custData = props.custData
   const nameRef = useRef();
   const titleRef = useRef();
   const phoneRef = useRef();
@@ -21,6 +24,12 @@ export default function AddContact(props) {
     .then(res => {
       console.log("added")
       setShowForm(false)
+      axios.get(`/api/customer/${customer}`)
+      .then(res => {
+        console.log(res.data);
+        setCustData(res.data)
+      })
+      .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
   }

@@ -65,7 +65,7 @@ export default function CustomerDetail(props) {
         </>
       }
       {showForm ?
-        <AddContact setShowForm={setShowForm} id={custData.id} />
+        <AddContact customer={customer} setCustData={setCustData} setShowForm={setShowForm} id={custData.id} />
         :
         <>
           <Button onClick={() => setShowForm(true)}>Add Contact</Button>
