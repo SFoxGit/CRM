@@ -14,7 +14,7 @@ export default function CustomerDetail(props) {
 
   const editNote = (e) => {
     e.preventDefault();
-    axios.put(`/api/customer/${customer}`, { note: noteRef.current.value})
+    axios.put(`/api/customer/note/${customer}`, { note: noteRef.current.value})
     .then(res => {
       console.log("updated customer note")
     })
